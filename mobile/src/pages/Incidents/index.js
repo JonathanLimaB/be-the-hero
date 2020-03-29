@@ -23,18 +23,18 @@ export default function Incidents(){
         }
 
         if (total > 0 && incidents.length === total){
-            return
+            return;
         }
 
         setLoading(true);
         const response = await api.get('incidents', {
             params: {page}
         });
-
+  
         setIncidents([...incidents, ...response.data]);
         setTotal(response.headers['x-total-count']);
         setPage(page + 1);
-        setLoading(false);
+        setLoading(false);  
     }
 
     useEffect(() => {
@@ -46,11 +46,11 @@ export default function Incidents(){
             <View style={styles.header}>
                 <Image source={logoImg} />
                 <Text style={styles.headerText}>
-                    Total de <Text style={styles.headerTextBold}>{total} casos</Text>.
+                    Total de <Text style={styles.headerTextBold}>{total} casos.</Text>.
                 </Text>
             </View>
             <Text style={styles.title}>Bem-vindo!</Text>
-            <Text style={styles.description}>Escolha um dos casos abaixo e salve dia</Text>
+            <Text style={styles.description}>Escolha um dos casos abaixo e salve o dia</Text>
 
             <FlatList
                 data={incidents}
@@ -87,5 +87,5 @@ export default function Incidents(){
                 )} />
 
         </View>
-    )
+    );
 }
