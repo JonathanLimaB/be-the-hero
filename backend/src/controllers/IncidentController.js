@@ -9,8 +9,8 @@ module.exports = {
 
     const incidents = await connection('incidents')
       .join('ongs', 'ongs.id', '=', 'incidents.ong_id')
-      .limit(5)
-      .offset((page - 1) * 5)
+      .limit(5) // limita a 5 casos para podermos fazer a paginação de 5 em 5
+      .offset((page - 1) * 5) // adiciona a próxima pagina
       .select([
           'incidents.*',
           'ongs.name', 
@@ -24,11 +24,12 @@ module.exports = {
     return response.json(incidents);
   },
 
+  /*Criação de caso*/
   async create(request, response){
     const { title, description, value } = request.body;
     const ong_id = request.headers.authorization;
 
-    const [id] = await connection('incidents').insert({ // insere e retorna o id ja que o mesmo é incrementado automaticamente
+    const [id] = await connection('incidents').insert({
         title,
         description,
         value,
@@ -39,6 +40,7 @@ module.exports = {
 
   },
 
+  /*deleção de caso*/
   async delete(request, response){
     const { id } = request.params;
     const ong_id = request.headers.authorization;

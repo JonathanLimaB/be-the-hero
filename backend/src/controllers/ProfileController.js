@@ -1,6 +1,7 @@
 const connection = require('../database/connection');
 
 module.exports = {
+  /* retorna os casos de uma determinada ong */
     async index(request, response){
         const ong_id = request.headers.authorization;
         const incidents = await connection('incidents')

@@ -1,6 +1,7 @@
 const connection = require('../database/connection');
 
 module.exports = {
+  /* criando sessão */
     async create(request, response){
       const { id } = request.body;
 
